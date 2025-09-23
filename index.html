@@ -29,7 +29,7 @@
     }
 
     header {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -37,25 +37,26 @@
       flex-direction: column;
       color: #4b2e2e;
       animation: fadeIn 2s ease-in-out;
+      padding: 20px;
     }
     header h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 4.5rem;
+      font-size: 4rem;
       text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
       animation: glow 3s infinite alternate;
     }
     header p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       letter-spacing: 2px;
       animation: fadeUp 2s ease;
     }
 
     /* Card transparan elegan */
     .section {
-      padding: 60px 20px;
+      padding: 40px 20px;
       background: rgba(255,255,255,0.25);
       border-radius: 20px;
-      margin: 40px auto;
+      margin: 30px auto;
       max-width: 1000px;
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
@@ -67,7 +68,7 @@
     h2 {
       color: #4b2e2e;
       font-family: 'Great Vibes', cursive;
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin-bottom: 20px;
     }
 
@@ -122,33 +123,69 @@
       color: #f5e6c8;
       text-align: center;
       animation: fadeUp 2s ease;
+      font-size: 0.9rem;
     }
 
     /* Tombol musik */
     .btn-music {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 15px;
+      right: 15px;
       z-index: 10;
       background: #d2b48c;
       color: #4b2e2e;
       border: none;
-      padding: 10px 20px;
+      padding: 8px 15px;
       border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
       transition: all 0.3s ease-in-out;
+      font-size: 0.9rem;
     }
     .btn-music:hover {
       transform: scale(1.1);
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 3rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      .section {
+        padding: 25px 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      .btn-music {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      h4 {
+        font-size: 1.1rem;
+      }
+      p {
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- 🎵 Musik Background -->
 <!-- 🎵 Musik Background -->
 <audio id="bg-music" autoplay loop muted>
   <source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
@@ -158,16 +195,16 @@
 
 <!-- Hero -->
 <header>
-  <h1>Nashwa & Kiki</h1>
+  <h1>Nashwa <span class="ampersand">&</span> Kiki</h1>
   <p>Jumat, 17 Oktober 2025</p>
-  <div id="countdown" class="countdown"></div>
+  <div id="countdown" class="countdown mt-3"></div>
 
   <!-- Tambahan Doa Restu -->
   <div class="mt-4">
-    <h3 style="font-family: 'Scheherazade', serif; font-size: 3rem; color:#4b2e2e; margin-bottom:20px;">
+    <h3 style="font-family: 'Scheherazade', serif; font-size: 2rem; color:#4b2e2e; margin-bottom:20px;">
       بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
     </h3>
-    <p style="font-size:1.4rem; max-width:800px; margin:auto; color:#4b2e2e; line-height:1.8;">
+    <p style="font-size:1.4rem; max-width:800px; margin:auto; color:#4b2e2e; line-height:1.6;">
       Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.  
       Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa restu.
     </p>
@@ -178,22 +215,22 @@
 <section class="section text-center">
   <h2>Mempelai</h2>
   <div class="row justify-content-center">
-    <div class="col-md-4">
+    <div class="col-md-4 col-10 mb-4">
       <h4>Nashwa Sri Rahayu</h4>
       <p>Putri dari Alm. Bapak Andi Sutisna & Ibu Jamilah</p>
       <hr>
-      <p class="alamat"> kp.Ngamprah Kidul RT 003/ RW 002, Desa.Ngamprah, Kec.Ngamprah, Kab.Bandung Barat</p>
+      <p class="alamat"> Kp. Ngamprah Kidul RT 003/ RW 002, Desa Ngamprah, Kec. Ngamprah, Kab. Bandung Barat</p>
     </div>
-    <div class="col-md-1 d-flex align-items-center justify-content-center">
-      <h2 class="ampersand" style="font-family: 'Great Vibes', cursive; font-size: 3rem; color:#4b2e2e; margin:0;">
+    <div class="col-md-1 d-none d-md-flex align-items-center justify-content-center">
+      <h2 class="ampersand" style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color:#4b2e2e; margin:0;">
         &
       </h2>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-10">
       <h4>Kiki Antoni</h4>
       <p>Putra dari Bapak Adin & Ibu Kartini</p>
       <hr>
-      <p class="alamat"> kp.Cikabul RT 01 RW07 Desa. Cimanggu, Kec.Ngamprah, Kab.Bandung Barat</p>
+      <p class="alamat"> Kp. Cikabul RT 01 RW 07, Desa Cimanggu, Kec. Ngamprah, Kab. Bandung Barat</p>
     </div>
   </div>
 </section>
@@ -203,11 +240,11 @@
   <h2>Acara</h2>
   <div class="mb-4">
     <p><strong>Akad Nikah:</strong> 09.00 WIB</p>
-    <p>📍 <em>Kp.Ngamprah Kidul RT 003/ RW 002, Desa.Ngamprah, Kec.Ngamprah, Kab.Bandung Barat</em></p>
+    <p>📍 <em>Kp. Ngamprah Kidul RT 003/ RW 002, Desa Ngamprah, Kec. Ngamprah, Kab. Bandung Barat</em></p>
   </div>
   <div class="mb-4">
     <p><strong>Resepsi:</strong> 11.00 WIB</p>
-    <p>📍 <em>Kp.Ngamprah Kidul RT 003/ RW 002, Desa.Ngamprah, Kec.Ngamprah, Kab.Bandung Barat</em></p>
+    <p>📍 <em>Kp. Ngamprah Kidul RT 003/ RW 002, Desa Ngamprah, Kec. Ngamprah, Kab. Bandung Barat</em></p>
     <a href="https://maps.app.goo.gl/um4z3SuNaLMoWQZQA"
        target="_blank" class="btn btn-outline-dark btn-sm mt-2">
       <i class="fa fa-map-marker-alt"></i> Lihat Lokasi Acara
@@ -220,10 +257,10 @@
   <h2>Konfirmasi Kehadiran</h2>
   <div class="container">
     <form id="rsvpForm" class="row g-3 justify-content-center">
-      <div class="col-md-5">
+      <div class="col-md-5 col-10">
         <input type="text" id="nama" class="form-control" placeholder="Nama" required>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 col-10">
         <select id="konfirmasi" class="form-select" required>
           <option value="">Konfirmasi</option>
           <option value="Hadir">Hadir</option>
@@ -240,7 +277,7 @@
 <!-- Surah Ar-Rum -->
 <section class="section text-center">
   <h2>Surah Ar-Rum Ayat 21</h2>
-  <p style="font-size:1.2rem; max-width:900px; margin:auto; line-height:1.9; color:#4b2e2e;">
+  <p style="font-size:1rem; max-width:900px; margin:auto; line-height:1.6; color:#4b2e2e;">
     "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan untukmu pasangan-pasangan
     dari jenismu sendiri, agar kamu merasa tenteram kepadanya, dan Dia menjadikan di antaramu
     rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda
@@ -277,27 +314,24 @@
   }, 1000);
 
   // Musik Play/Pause
- // Musik Play/Pause
-// Musik Play/Pause
-const music = document.getElementById("bg-music");
-function toggleMusic() {
-  if (music.paused) {
-    music.muted = false; // hilangkan mute kalau user klik
-    music.play();
-  } else {
-    music.pause();
+  const music = document.getElementById("bg-music");
+  function toggleMusic() {
+    if (music.paused) {
+      music.muted = false;
+      music.play();
+    } else {
+      music.pause();
+    }
   }
-}
 
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    music.muted = false;  // buka mute otomatis setelah halaman load
-    music.play().catch(() => {
-      console.log("Autoplay diblokir browser, user perlu klik Play 🎵");
-    });
-  }, 500); // delay sedikit supaya autoplay lebih aman
-});
-
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      music.muted = false;
+      music.play().catch(() => {
+        console.log("Autoplay diblokir browser, user perlu klik Play 🎵");
+      });
+    }, 500);
+  });
 
   // RSVP WhatsApp
   document.getElementById("rsvpForm").addEventListener("submit", function(e) {
