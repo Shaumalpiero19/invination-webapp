@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Undangan Pernikahan Ayu & Kiki</title>
+  <title>Undangan Pernikahan Nashwa & Kiki</title>
   
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -86,37 +86,6 @@
       animation: fadeIn 3s ease-in-out;
     }
 
-    /* Animasi pulse untuk simbol & */
-    @keyframes pulse {
-      0%   { transform: scale(1); opacity: 0.8; }
-      50%  { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
-    }
-    .ampersand {
-      display: inline-block;
-      animation: pulse 2.5s infinite ease-in-out;
-    }
-
-    /* Animasi glow */
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #d2b48c, 0 0 20px #d2b48c; }
-      to   { text-shadow: 0 0 20px #8b4513, 0 0 30px #d2b48c; }
-    }
-
-    /* Animasi fade & slide */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateX(-40px);}
-      to { opacity: 1; transform: translateX(0);}
-    }
-
     footer {
       background: rgba(0,0,0,0.6);
       padding: 20px;
@@ -143,56 +112,94 @@
       transition: all 0.3s ease-in-out;
       font-size: 0.9rem;
     }
-    .btn-music:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    .btn-music.playing {
+      background: #8b4513;
+      color: white;
     }
 
-    /* Responsif */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 3rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
-      h2 {
-        font-size: 2rem;
-      }
-      .section {
-        padding: 25px 15px;
-      }
+   
+    #popup h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
     }
 
-    @media (max-width: 576px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      .btn-music {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      h4 {
-        font-size: 1.1rem;
-      }
-      p {
-        font-size: 0.85rem;
-      }
+    @keyframes pulse {
+      0%   { transform: scale(1); opacity: 0.8; }
+      50%  { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
     }
+    .ampersand {
+      display: inline-block;
+      animation: pulse 2.5s infinite ease-in-out;
+  
+  }
+
+  #popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+
+    /* Sama seperti body */
+    background: url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80")
+      no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  /* Overlay blur di popup */
+  #popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(210, 180, 140, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: -1;
+  }
+
+  .popup-inner {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 30px 40px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
   </style>
 </head>
 <body>
 
 <!-- 🎵 Musik Background -->
-<audio id="bg-music" autoplay loop muted>
+<audio id="bg-music" loop>
   <source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
   Browser Anda tidak mendukung audio.
 </audio>
-<button class="btn-music" onclick="toggleMusic()">🎵 Play / Pause</button>
+<button class="btn-music" onclick="toggleMusic()" id="musicBtn">🎵 Play Musik</button>
 
+<!-- Popup -->
+<div id="popup">
+  <div class="popup-inner text-center p-4">
+    <h2 class="judul-undangan">Undangan Pernikahan</h2>
+    <h3 class="nama-mempelai">Nashwa & Kiki</h3>
+    <button id="openBtn" class="btn btn-dark mt-3">💌 Buka Undangan</button>
+  </div>
+</div>
+
+<!-- Konten Utama -->
+<div id="content" style="display:none;">
+
+  <!-- Hero -->
+  
 <!-- Hero -->
 <header>
   <h1>Nashwa <span class="ampersand">&</span> Kiki</h1>
@@ -290,64 +297,70 @@
   <p>Terima Kasih atas Doa & Kehadiran Anda</p>
 </footer>
 
-<!-- Script Countdown & Musik -->
+</div>
+
 <script>
   // Countdown
   const countdown = document.getElementById("countdown");
   const eventDate = new Date("Oct 17, 2025 09:00:00").getTime();
-  const timer = setInterval(() => {
+  setInterval(() => {
     const now = new Date().getTime();
     const distance = eventDate - now;
-
-    if (distance < 0) {
-      clearInterval(timer);
-      countdown.innerHTML = "Acara Sedang Berlangsung";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+    if (distance < 0) { countdown.innerHTML = "Acara Sedang Berlangsung"; return; }
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
     countdown.innerHTML = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
   }, 1000);
 
-  // Musik Play/Pause
+  // Musik
   const music = document.getElementById("bg-music");
+  const musicBtn = document.getElementById("musicBtn");
+  let isPlaying = false;
+  function playMusic() {
+    music.play().then(() => {
+      isPlaying = true;
+      musicBtn.textContent = "🎵 Pause Musik";
+      musicBtn.classList.add("playing");
+    }).catch(err => console.log("Autoplay diblokir: " + err.message));
+  }
   function toggleMusic() {
-    if (music.paused) {
-      music.muted = false;
-      music.play();
-    } else {
-      music.pause();
-    }
+    if (isPlaying) { music.pause(); isPlaying=false; musicBtn.textContent="🎵 Play Musik"; musicBtn.classList.remove("playing"); }
+    else { playMusic(); }
   }
 
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      music.muted = false;
-      music.play().catch(() => {
-        console.log("Autoplay diblokir browser, user perlu klik Play 🎵");
-      });
-    }, 500);
+  // Popup buka undangan
+  const popup = document.getElementById("popup");
+  const content = document.getElementById("content");
+  document.getElementById("openBtn").addEventListener("click", () => {
+    popup.style.display = "none";
+    content.style.display = "block";
+    playMusic(); // Musik otomatis diputar setelah buka undangan
   });
 
   // RSVP WhatsApp
   document.getElementById("rsvpForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    let nama = document.getElementById("nama").value;
+    let nama = document.getElementById("nama").value.trim();
     let konfirmasi = document.getElementById("konfirmasi").value;
+    let noHP = "6283142684934"; // ganti dengan nomor WhatsApp yang benar
+    let pesan = "";
 
     if (konfirmasi === "Hadir") {
-      let pesan = `Halo, saya *${nama}* ingin mengonfirmasi kehadiran. Saya akan *HADIR* di acara Ayu & Kiki.`;
-      let noHP = "6283813214950";
-      let url = `https://wa.me/${noHP}?text=${encodeURIComponent(pesan)}`;
+      pesan = `Halo, saya *${nama}* ingin mengonfirmasi kehadiran. Saya akan *HADIR* di acara Nashwa & Kiki.`;
+    } else if (konfirmasi === "Tidak Hadir") {
+      pesan = `Halo, saya *${nama}* mohon maaf tidak bisa hadir di acara Nashwa & Kiki.`;
+    }
+
+    if (pesan) {
+      let url = "https://wa.me/" + noHP + "?text=" + encodeURIComponent(pesan);
       window.open(url, "_blank");
-    } else {
-      alert("Terima kasih atas konfirmasinya 🙏");
     }
   });
+
+
+
 </script>
 
 </body>
